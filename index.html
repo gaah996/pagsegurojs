@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>PagSeguro Hash Generator</title>
+    <script
+      type="text/javascript"
+      src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"
+    ></script>
+  </head>
+  <body>
+    <p>SessionID: <input id="sessionID" type="text" /></p>
+    <p><input type="button" value="Generate" onclick="generateHash()" /></p>
+    <hr />
+    <h3>Resposta:</h3>
+    <p>senderHash: <span id="senderHash"></span></p>
+    <p>creditCardToken: <span id="creditCardToken"></span></p>
+
+    <script>
+      function generateHash() {
+        const sessionID = document.querySelector("#sessionID").value;
+        const senderHash = document.querySelector("#senderHash");
+        const creditCardToken = document.querySelector("#creditCardToken");
+
+        PagSeguroDirectPayment.setSessionId(sessionID);
+
+        PagSeguroDirectPayment.onSenderHashReady(response => {
+          if (response.status == "error") {
+            return false;
+          } else {
+            senderHash.innerHTML = response.senderHash;
+          }
+        });
+
+        PagSeguroDirectPayment.createCardToken({
+          cardNumber: "4111111111111111",
+          brand: "visa",
+          cvv: "123",
+          expirationMonth: "12",
+          expirationYear: "2030",
+          success: response => {
+            creditCardToken.innerHTML = response.card.token;
+          },
+          error: response => {},
+          complete: response => {}
+        });
+      }
+    </script>
+  </body>
+</html>
