@@ -9,44 +9,51 @@
       type="text/javascript"
       src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"
     ></script>
+    <script src="assets/scripts/generateHash.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
-    <p>SessionID: <input id="sessionID" type="text" /></p>
-    <p><input type="button" value="Generate" onclick="generateHash()" /></p>
-    <hr />
-    <h3>Resposta:</h3>
-    <p>senderHash: <span id="senderHash"></span></p>
-    <p>creditCardToken: <span id="creditCardToken"></span></p>
-
-    <script>
-      function generateHash() {
-        const sessionID = document.querySelector("#sessionID").value;
-        const senderHash = document.querySelector("#senderHash");
-        const creditCardToken = document.querySelector("#creditCardToken");
-
-        PagSeguroDirectPayment.setSessionId(sessionID);
-
-        PagSeguroDirectPayment.onSenderHashReady(response => {
-          if (response.status == "error") {
-            return false;
-          } else {
-            senderHash.innerHTML = response.senderHash;
-          }
-        });
-
-        PagSeguroDirectPayment.createCardToken({
-          cardNumber: "4111111111111111",
-          brand: "visa",
-          cvv: "123",
-          expirationMonth: "12",
-          expirationYear: "2030",
-          success: response => {
-            creditCardToken.innerHTML = response.card.token;
-          },
-          error: response => {},
-          complete: response => {}
-        });
-      }
-    </script>
+    <div class="container">
+      <div class="config">
+        <form onsubmit="generateHash(event)">
+          <label for="session-id">
+            Session ID: <input type="text" name="session-id" id="session-id">
+          </label>
+          <div class="cards">
+            <label for="visa-card">
+              <input type="radio" name="credit-card" id="visa-card" value="visa">
+              <span>Visa</span>
+            </label>
+            <label for="master-card">
+              <input type="radio" name="credit-card" id="master-card" value="master">
+              <span>Mastercard</span>
+            </label>
+          </div>
+          <button type="submit">Generate</button>
+        </form>
+      </div>
+      <div class="answer">
+        <div class="creditcard-object">
+          <div class="creditcard-brand">
+            <img src="assets/images/master-logo.png" alt="Brand">
+          </div>
+          <div class="creditcard-number">5444 4444 4444 4444</div>
+          <div class="creditcard-name">GABRIEL CASTRO</div>
+          <div class="creditcard-date">
+            <span>val</span>
+            12/27
+          </div>
+          <div class="creditcard-cvv">
+            <span>cvv</span>
+            123
+          </div>
+        </div>
+        <div class="response">
+          <h1>RESPONSE</h1>
+          <p>SENDER HASH: <span id="sender-hash"></span></p>
+          <p>CREDIT CARD TOKEN: <span id="credit-card-token"></span></p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

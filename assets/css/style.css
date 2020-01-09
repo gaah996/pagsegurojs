@@ -1,0 +1,107 @@
+body {
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+.container {
+  background: white;
+  padding: 30px;
+  display: flex;
+  border-radius:10px;
+  /* transition: all 300ms ease-in-out; */
+}
+.config {
+  padding-right: 30px;
+  width: 350px;
+  height: 100%;
+}
+.answer {
+  border-left: 1px solid #ccc;
+  padding-left: 30px;
+}
+.response {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 2px #ccc;
+  padding: 15px;
+  margin-top: 30px;
+  position: relative;
+  width: calc(350px - 30px);
+  word-break: break-all;
+}
+.response h1 {
+  margin: 0 0 20px;
+  padding: 0;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: bold;
+}
+.response p {
+  margin: 10px 0;
+  padding: 0;
+  color: #aaa;
+  font-size: 12px;
+}
+.response p > span {
+  color: black;
+}
+
+/* CREDITCARD STYLE */
+.creditcard-object {
+  width: 350px;
+  height: 200px;
+  background-image: linear-gradient(225deg, #7b4da8, #5c0ea8) ;
+  border-radius: 5px;
+  position: relative;
+  color: white;
+  font-family: sans-serif;
+}
+.creditcard-brand {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 80px;
+}
+.creditcard-brand img {
+  width: 100%;
+}
+.creditcard-number {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  letter-spacing: 1px;
+  font-size: 24px;
+}
+.creditcard-name {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 14px;
+}
+.creditcard-date {
+  position: absolute;
+  bottom: 20px;
+  right: 75px;
+  font-size: 14px;
+}
+.creditcard-date > span {
+  color: #a08ab6;
+  font-size: 10px;
+}
+.creditcard-cvv {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+}
+.creditcard-cvv > span {
+  color: #a08ab6;
+  font-size: 10px;
+}
